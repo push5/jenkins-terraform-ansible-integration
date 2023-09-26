@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    environment {
+      PATH = "${PATH}:${getTerraformPath()}"
+    }
+    stages {
+        stage('Create S3 Bucket'){
+            steps{
+                sh 'ansible-playbook s3-create.yaml'
+            }
+        }
+        stage('Terraform-Init & apply - dev') {
+            steps {
+                sh returnStatus: true, script: 'terraform workspace new dev'
+                sh 'terraform init'
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        stage('Terraform-Init & apply - prod') {
+            steps {
+                sh returnStatus: true, script: 'terraform workspace new prod'
+                sh 'terraform init'
+                sh 'terraform apply --auto-approve'
+            }
+        }
+    }
+}
+
+def getTerraformPath(){
+    def tfHome = tool name: 'terraform-server', type: 'terraform'
+    return tfHome
+}
+
+def createS3bucket(bucketName){
+    sh returnStatus: true, script: "aws s3 mb ${bucketName} --region ap-south-1"
+}
