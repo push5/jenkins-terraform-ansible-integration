@@ -1,8 +1,1 @@
----
-- hosts: localhost
-  tasks: 
-    - name: Create s3 bucket using playbook
-      s3_bucket:
-          name: jenkins-ansible-terraform-git-integration-27
-          state: present
-      
+
