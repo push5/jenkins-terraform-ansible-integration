@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Create S3 Bucket1'){
             steps{
-                sh 'ansible-playbook s3-create.yaml'
+               ## sh 'ansible-playbook s3-create.yaml'
             }
         }
         stage('Terraform-Init & apply - dev') {
