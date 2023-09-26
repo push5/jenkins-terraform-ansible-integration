@@ -3,6 +3,6 @@ resource "aws_vpc" "jenkins-main" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "Jenkins-tf-main"
+    Name = "Jenkins-tf-main "
   }
 }
