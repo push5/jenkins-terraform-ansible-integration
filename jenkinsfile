@@ -9,7 +9,7 @@ pipeline {
               // ## sh 'ansible-playbook s3-create.yaml'
            // }
         //}
-        stage('Terraform-Init & apply - dev') {
+        stage('Terraform-Init & apply - dev1') {
             steps {
                 sh returnStatus: true, script: 'terraform workspace new dev1'
                 sh 'terraform init'
